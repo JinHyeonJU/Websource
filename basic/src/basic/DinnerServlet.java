@@ -10,40 +10,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddServlet
+ * Servlet implementation class DinnerServlet
  */
-@WebServlet("/Add")
-public class AddServlet extends HttpServlet {
+@WebServlet("/DinnerServlet")
+public class DinnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//사용자가 보낸 값 가져와서
-		int num1 = Integer.parseInt(request.getParameter("num1"));
-		int num2 = Integer.parseInt(request.getParameter("num2"));
-		
-		//더하기 한 후 
-		int sum = num1 + num2;
-		
-		//보여지는 페이지에 대한 컨텐츠 타입 설정
 		response.setContentType("text/html;charset=utf-8");
-
-		//결과값 출력
+		request.setCharacterEncoding("utf-8");
+		
+		String[] dinner = request.getParameterValues("dinner");
+		
 		PrintWriter out = response.getWriter();
-		out.print("<html><head><title>덧셈프로그램</title></head>");
-		out.print("<body><h2>덧셈결과</h2>");
-		out.print("<h3>"+num1+" + "+num2+" = "+sum);
-		out.print("</body></html>");
+		out.print("<html><head><title>저녁</title></head>");
+		out.print("<body><h3>저녁메뉴</h3>");
+		out.print("<ul>");
+		for(String d:dinner) {
+			out.print("<li>"+d+"</li>");
+		}
+		out.print("</head></html>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

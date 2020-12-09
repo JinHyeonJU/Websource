@@ -2,6 +2,7 @@ package basic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,40 +11,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AddServlet
+ * Servlet implementation class CatServlet
  */
-@WebServlet("/Add")
-public class AddServlet extends HttpServlet {
+@WebServlet("/CatServlet")
+public class CatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//사용자가 보낸 값 가져와서
-		int num1 = Integer.parseInt(request.getParameter("num1"));
-		int num2 = Integer.parseInt(request.getParameter("num2"));
-		
-		//더하기 한 후 
-		int sum = num1 + num2;
-		
-		//보여지는 페이지에 대한 컨텐츠 타입 설정
 		response.setContentType("text/html;charset=utf-8");
-
-		//결과값 출력
+		request.setCharacterEncoding("utf-8");
+		// 사용자의 선택 값 가져오기
+		// String[] 변수 = request.getParameterValues("가져올값") : 여러개의 값
+		String[] cat = request.getParameterValues("cat");
+		// System.out.println(Arrays.toString(cat));
+	
+		//화면에 출력하기
 		PrintWriter out = response.getWriter();
-		out.print("<html><head><title>덧셈프로그램</title></head>");
-		out.print("<body><h2>덧셈결과</h2>");
-		out.print("<h3>"+num1+" + "+num2+" = "+sum);
-		out.print("</body></html>");
+		out.print("<html><head><title>고냥이</title></head>");
+		out.print("<body><h3>좋아하는 고냥이</h3>");
+		out.print("<ul>");
+		for(String s:cat) {
+			out.print("<li>"+s+"</li>");
+		}
+		out.print("</head></html>");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
