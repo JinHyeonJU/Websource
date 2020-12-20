@@ -1,6 +1,7 @@
 package controller;
 
 import action.Action;
+import action.MemberJoinAction;
 import action.MemberLeaveAction;
 import action.MemberLoginAction;
 import action.MemberModifyAction;
@@ -24,6 +25,8 @@ public class MemberActionFactory {
 			action = new MemberModifyAction("view/loginForm.jsp");
 		}else if(cmd.equals("/leave.do")) {
 			action = new MemberLeaveAction("view/loginForm.jsp");
+		}else if(cmd.equals("/join.do")) {
+			action = new MemberJoinAction("view/loginForm.jsp");
 		}
 		return action;
 	}

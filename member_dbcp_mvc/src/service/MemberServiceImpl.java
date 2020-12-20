@@ -26,7 +26,18 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean registerMember(MemberVO member) {
-		return false;
+		boolean registerFlag = false;
+		
+		int result = dao.isJoin(member);
+		
+		if(result > 0) {
+			registerFlag = true;
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return registerFlag;
 	}
 
 	@Override
