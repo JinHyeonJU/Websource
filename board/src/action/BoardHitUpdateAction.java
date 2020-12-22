@@ -19,7 +19,7 @@ public class BoardHitUpdateAction implements Action {
 		BoardService service = new BoardServiceImpl();
 		service.hitUpdate(bno);
 		
-		path += "?bno"+bno;
+		path += "?bno="+bno;
 		
 		return new ActionForward(path, true);
 	}
