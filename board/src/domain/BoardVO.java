@@ -24,5 +24,5 @@ public class BoardVO {
 	private int re_lev; //답변글의 레벨
 	private int re_seq; //답변글의 순서
 	private int readcount; //조회수
-	private Date date; //작성날짜
+	private Date regdate; //작성날짜
 }

@@ -19,7 +19,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public boolean insertArticle(BoardVO vo) {
-		return false;
+		boolean insertFlag = false;
+		
+		int result = dao.insert(vo);
+		if(result>0) {
+			commit(con);
+			insertFlag=true;
+		}else {
+			rollback(con);
+		}
+		close(con);	
+		return insertFlag;
 	}
 
 	@Override
@@ -34,12 +44,30 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> getList() {
-		return null;
+		List<BoardVO> list = dao.selectAll();
+		close(con);
+		return list;
 	}
 
 	@Override
 	public BoardVO getRow(int bno) {
-		return null;
+		BoardVO vo = dao.select(bno);
+		close(con);
+		return vo;
 	}
 
+	@Override
+	public boolean hitUpdate(int bno) {
+		boolean updateFlag = false;
+		
+		int result = dao.readCountUpdate(bno);
+		if(result>0) {
+			commit(con);
+			updateFlag = true;
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return updateFlag;
+	}
 }
