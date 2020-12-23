@@ -5,7 +5,7 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header">
-			<h3 class="box-title">Board Modify</h3>
+			<h3 class="box-title" style="font-size:21px; font-style:bold">게시글 수정</h3>
 		</div>
 		<div style="height:20px"></div>
 		<form action="" method="post" role="form">

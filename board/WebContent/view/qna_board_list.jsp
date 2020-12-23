@@ -5,7 +5,7 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header">
-			<h3 class="box-title">List Board</h3>
+			<h3 class="box-title" style="font-size:21px; font-style:bold">전체게시글</h3>
 		</div>
 		<div class="row">
 			<div class="col-md-4"><!--글쓰기 버튼-->

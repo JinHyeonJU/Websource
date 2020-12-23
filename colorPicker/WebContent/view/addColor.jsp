@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
+    pageEncoding="UTF-8"%>
+<%@include file="../include/header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 <!-- Main content -->
 <section class="content">
   <div class="box box-primary">
@@ -7,7 +15,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
       <h3 class="box-title" style="font-size:21px; font-style:bold">게시글 작성</h3>
     </div>
     <div style="height:20px"></div>
-    <form action="../qWrite.do" method="post" role="form" id="writeForm" enctype="multipart/form-data">
+    <form action="../addColor.do" method="post" role="form" id="writeForm" enctype="multipart/form-data">
       <div class="box-body">
         <div class="form-group row">
           <label for="name" class="col-sm-2 col-form-label">작성자</label>
@@ -35,19 +43,6 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
               maxlength="100"
               required
             />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="content" class="col-sm-2 col-form-label">내용</label>
-          <div class="col-sm-10">
-            <textarea
-              name="content"
-              id="content"
-              cols="60"
-              class="form-control"
-              rows="15"
-              required
-            ></textarea>
           </div>
         </div>
         <div class="form-group row">
@@ -85,4 +80,5 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
   </div>
   <!-- /.box -->
 </section>
-<%@include file="../include/footer.jsp"%>
+</body>
+</html>

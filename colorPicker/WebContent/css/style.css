@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+a{
+	padding-left:10px;
+}
+a:link { color: white; }
+a:visited { color: white; }

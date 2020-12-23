@@ -5,7 +5,7 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header">
-			<h3 class="box-title">Password Check</h3>
+			<h3 class="box-title" style="font-size:21px; font-style:bold">비밀번호 확인</h3>
 		</div>
 		<div style="height:20px"></div>
 		<form name="pwdCheck" method="post" action="">

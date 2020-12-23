@@ -5,7 +5,7 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header">
-			<h3 class="box-title">Read Board</h3>
+			<h3 class="box-title" style="font-size:21px; font-style:bold">게시글 정보</h3>
 		</div>
 		<div style="height:20px"></div>
 		<form action="" method="post" role="form">
@@ -31,7 +31,7 @@
 				<div class="form-group  row">
 					<label for="filename" class="col-sm-2 col-form-label">파일첨부</label>
 					<div class="col-sm-10">
-						${vo.attach}
+						<a href="">${vo.attach}</a>
 					</div>
 				</div>
 				<div style="height:10px"></div>
