@@ -5,14 +5,19 @@ import java.util.List;
 import domain.BoardVO;
 
 public interface BoardService {
-	//CRUD
+
+	// CRUD
 	public boolean insertArticle(BoardVO vo);
 	public boolean updateArticle(BoardVO vo);
-	public boolean deleteArticle(int bno);
-	//게시글 전체 조회
+	public boolean deleteArticle(int bno, String password);
+
+	// 조회(전체 / 개별)
 	public List<BoardVO> getList();
-	//게시글 특정 번호 조회
 	public BoardVO getRow(int bno);
-	//조회수 업데이트
+	
+	// 조회수 업데이트
 	public boolean hitUpdate(int bno);
+	
+	//댓글
+	public boolean insertReply(BoardVO reply);
 }

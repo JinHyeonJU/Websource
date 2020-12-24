@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
 <section class="content">
   <div class="box box-primary">
     <div class="box-header">
-      <h3 class="box-title" style="font-size:21px; font-style:bold">게시글 작성</h3>
+      <h3 class="box-title">Board Write</h3>
     </div>
     <div style="height:20px"></div>
     <form action="../qWrite.do" method="post" role="form" id="writeForm" enctype="multipart/form-data">
@@ -19,7 +19,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
               size="10"
               class="form-control"
               maxlength="10"
-              required
+              required="required"
             />
           </div>
         </div>
@@ -33,7 +33,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
               size="50"
               class="form-control"
               maxlength="100"
-              required
+              required="required"
             />
           </div>
         </div>
@@ -46,7 +46,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
               cols="60"
               class="form-control"
               rows="15"
-              required
+              required="required"
             ></textarea>
           </div>
         </div>
@@ -60,7 +60,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
               class="form-control"
               size="10"
               maxlength="10"
-              required
+              required="required"
             />
           </div>
         </div>
@@ -76,6 +76,7 @@ pageEncoding="UTF-8"%> <%@include file="../include/header.jsp"%>
           <button type="submit" class="btn btn-primary">등록</button>
           <button type="reset" class="btn btn-danger">다시작성</button>
           <button type="button" class="btn btn-warning" id="list" onclick="location.href='../qList.do'">
+          <!-- 자바스크립트 [ onclick="location.href='../qList.do' ] == 제이쿼리 [] -->
             목록보기
           </button>
         </div>

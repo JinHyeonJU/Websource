@@ -18,8 +18,14 @@
 	//response 헤더 설정
 	response.setContentType("application/octet-stream");
 	fileName = new String(fileName.getBytes("utf-8"),"iso-8859-1");
-	response.setHeader("Content-Disposition", "attachment;filename="+fileName);
 	
+	//fileName : uuid값_실제파일명
+	// _기준으로 substring 파일명 붙여주기
+	String oriName = fileName.substring(fileName.lastIndexOf("_")+1);
+	
+	response.setHeader("Content-Disposition", "attachment;filename="+oriName);
+	
+	//파일저장
 	BufferedOutputStream buf = new BufferedOutputStream(response.getOutputStream());
 	
 	int numRead = 0;
