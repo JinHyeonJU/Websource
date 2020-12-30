@@ -63,3 +63,6 @@ values(board_seq.nextval, 'Viewer', '123', 'Re:댓글 테스트 - 1', '댓글 �
 
 -- 3. 원본과 댓글 가져오기
 select bno, name, re_ref, re_lev, re_seq from board where re_ref=2310 order by re_seq;
+
+
+select count(*) from board;

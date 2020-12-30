@@ -28,7 +28,7 @@ public class MemberDAO {
 		// select userid, name from member where userid =? and password=?;
 		if (con != null) {
 			try {
-				String sql = "select userid, name from member where userid =? and password=?";
+				String sql = "select userid, name from memberTBL where userid =? and password=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, userid);
 				pstmt.setString(2, password);
@@ -54,7 +54,7 @@ public class MemberDAO {
 		
 		if (con != null) {
 			try {
-				String sql = "insert into member(userid, password, name, gender, email) values(?, ?, ?, ?, ?)";
+				String sql = "insert into memberTBL(userid, password, name, gender, email) values(?, ?, ?, ?, ?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member.getUserid());
 				pstmt.setString(2, member.getPassword());
@@ -80,7 +80,7 @@ public class MemberDAO {
 		
 		if(con != null) {
 			try {
-				String sql = "update member set password=? where userid=?";
+				String sql = "update memberTBL set password=? where userid=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, password);
 				pstmt.setString(2, userid);
@@ -100,7 +100,7 @@ public class MemberDAO {
 		
 		if (con != null) {
 			try {
-			String sql = "delete from member where userid=? and password=?";
+			String sql = "delete from memberTBL where userid=? and password=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			pstmt.setString(2, password);
@@ -115,4 +115,27 @@ public class MemberDAO {
 		}
 		return result;
 	} //isTerminate 종료
+	//중복 아이디
+	public boolean checkId(String userid) {
+		boolean result = false;
+		
+		String sql = "select userid from memberTBL where userid=?";
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			
+		}
+		return result;
+	}
 }

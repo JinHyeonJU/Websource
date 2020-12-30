@@ -38,7 +38,26 @@
 			<div class="row  justify-content-md-center">
 				<nav aria-label="Page navigation example">
 				  <ul class="pagination"><!--하단의 페이지 나누기 부분-->
-
+					<c:if test="${info.prev}">
+						<li class="page-item">
+							<a href="" class="gage-link">이전</a>
+						</li>
+					</c:if>
+					<c:forEach begin="${info.startPage}" end="${info.endPage}" var="idx">
+						<c:choose>
+							<c:when test="${idx==info.search.page}">
+								<li class="page-ltem active"><a class="page-link">${idx}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-ltem"><a class="page-link" href="">${idx}</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${info.next}">
+						<li class="page-item">
+							<a href="" class="page-link">다음</a>
+						</li>
+					</c:if>
 				  </ul>
 				</nav>					
 			</div>

@@ -1,18 +1,15 @@
 package member;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 public class MemberDAO {
-	
 	
 	public Connection getConnection() {
 		Connection con = null;
@@ -20,10 +17,9 @@ public class MemberDAO {
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
 			con = ds.getConnection();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// 실패 시 리턴 값
 		return con;
 	}
 
@@ -37,7 +33,7 @@ public class MemberDAO {
 		// select userid, name from member where userid =? and password=?;
 		if (con != null) {
 			try {
-				String sql = "select userid, name from memberTBL where userid =? and password=?";
+				String sql = "select userid, name from member where userid =? and password=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, userid);
 				pstmt.setString(2, password);
@@ -72,7 +68,7 @@ public class MemberDAO {
 		
 		if (con != null) {
 			try {
-				String sql = "insert into memberTBL(userid, password, name, gender, email) values(?, ?, ?, ?, ?)";
+				String sql = "insert into member(userid, password, name, gender, email) values(?, ?, ?, ?, ?)";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, member.getUserid());
 				pstmt.setString(2, member.getPassword());
@@ -105,7 +101,7 @@ public class MemberDAO {
 		
 		if(con != null) {
 			try {
-				String sql = "update memberTBL set password=? where userid=?";
+				String sql = "update member set password=? where userid=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, password);
 				pstmt.setString(2, userid);
@@ -124,27 +120,94 @@ public class MemberDAO {
 		}
 		return result;
 	} // isModify 종료
-	//delete from memberTBL where userid=? and password=?
 	
-	public int leaveMember(String userid, String password) {
+	public int isTerminate(String userid, String password) {
 		Connection con = getConnection();
 		PreparedStatement pstmt = null;
-		int result = 0;		
-		try {
-			String sql = "delete from memberTBL where userid=? and password=?";
+		int result = 0;
+		
+		if (con != null) {
+			try {
+			String sql = "delete from member where userid=? and password=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userid);
 			pstmt.setString(2, password);
+
 			result = pstmt.executeUpdate();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					pstmt.close();
+					con.close();
+				} catch (Exception e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+		return result;
+	} //isTerminate 종료
+	
+	// 중복 아이디
+	public boolean checkID(String userid) {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select userid from member where userid=?";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				result = true;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			try {
+				rs.close();
 				pstmt.close();
 				con.close();
 			} catch (Exception e2) {
 				e2.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	//중복 아이디
+	public boolean checkId(String userid) {
+		boolean result = false;
+		Connection con = getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		
+		String sql = "select userid from member where userid=?";
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, userid);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 		return result;

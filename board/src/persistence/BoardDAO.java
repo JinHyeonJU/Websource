@@ -208,4 +208,26 @@ public class BoardDAO {
 			}
 			return result;
 		}
+		
+		//전체 행 수 가져오기
+		//100개의 행 => 한페이지에 10개씩 => 1~10pages
+		//91개의 행 => 10pages
+		public int totalRows() {
+			String sql = "select count(*) from board";
+			int totalRow = 0;
+			try {
+				pstmt = con.prepareStatement(sql);
+				
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					totalRow = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			return totalRow;
+		}
 	}

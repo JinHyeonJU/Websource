@@ -1,6 +1,7 @@
 package controller;
 
 import action.Action;
+import action.MemberCheckIdAction;
 import action.MemberJoinAction;
 import action.MemberLeaveAction;
 import action.MemberLoginAction;
@@ -27,6 +28,8 @@ public class MemberActionFactory {
 			action = new MemberLeaveAction("view/loginForm.jsp");
 		}else if(cmd.equals("/join.do")) {
 			action = new MemberJoinAction("view/loginForm.jsp");
+		}else if(cmd.equals("/checkId.do")) {
+			action = new MemberCheckIdAction("view/checkId.jsp");
 		}
 		return action;
 	}

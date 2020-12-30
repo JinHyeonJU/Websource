@@ -7,52 +7,58 @@ import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-
-import org.apache.tomcat.jdbc.pool.DataSource;
+import javax.sql.DataSource;
 
 public class JDBCUtil {
-	Connection con = null;
-	try {
-		Context ctx = new InitialContext();
-		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
-		con = ds.getConnection();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	// 실패 시 리턴 값
-	return con;
-}
-public void commit(Connection con) {
-	try {
-		con.commit();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-}
-	public void rollback(Connection con) {
-		try {
-			con.rollback();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void close(Connection con) {
-		try {
-			con.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	public void close(PreparedStatement pstmt) {
-			try {
-				pstmt.close();
-			}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-	public void close(ResultSet rs) {
-			try {
-				rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+   public static Connection getConnection() {
+      Connection con = null;
+      try {
+         Context ctx = new InitialContext();
+         DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
+         con = ds.getConnection();
+         con.setAutoCommit(false);
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+      return con;
+   }
+   
+   //commit rollback => DML(insert, update,delete) - 데이터에 변화를 주는 애들
+   public static void commit(Connection con) {
+      try {
+         con.commit();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+   
+   public static void rollback(Connection con) {
+      try {
+         con.rollback();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+   
+   public static void close(Connection con) {
+      try {
+         con.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+   public static void close(PreparedStatement pstmt) {
+      try {
+         pstmt.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+   public static void close(ResultSet rs) {
+      try {
+         rs.close();
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
 }

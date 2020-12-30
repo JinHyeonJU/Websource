@@ -109,4 +109,11 @@ public class BoardServiceImpl implements BoardService {
 		close(con);
 		return replyFlag;
 	}
+
+	@Override
+	public int getRows() {
+		int totalRow = dao.totalRows();
+		close(con);
+		return totalRow;
+	}
 }
